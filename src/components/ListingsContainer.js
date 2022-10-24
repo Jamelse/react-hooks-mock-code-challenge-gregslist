@@ -1,11 +1,18 @@
 import React from "react";
-// import ListingCard from "./ListingCard";
+import ListingCard from "./ListingCard";
 
-function ListingsContainer() {
+function ListingsContainer({listings, onDeleteCLick, searched}) {
+  
+  const searchedListings = listings.filter((list) => {
+    return list.description.toLowerCase().includes(searched.toLowerCase()) 
+  })
+  
   return (
     <main>
       <ul className="cards">
-        {/* use the ListingCard component to display listings */}
+        {searchedListings.map((list) => {
+          return (<ListingCard key={list.id} listing={list} onDeleteCLick={onDeleteCLick}/>)
+        })}
       </ul>
     </main>
   );
